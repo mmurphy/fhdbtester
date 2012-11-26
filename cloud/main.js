@@ -22,7 +22,7 @@ exports.getConfig = function(params, callback) {
     if (err) {
       console.log("Error " + err);
     } else {
-      console.log(JSON.stringify(data));
+      console.log("Create: " + JSON.stringify(data));
       ret.doCreate = data;
       $fh.db({
         "act":'list', 
@@ -32,7 +32,7 @@ exports.getConfig = function(params, callback) {
           console.log("Error " + err);
         } else {
           
-          console.log(JSON.stringify(data));
+          console.log("list: " + JSON.stringify(data));
           ret.doList = data;
           $fh.db({
             "act": "deleteall",
@@ -41,7 +41,7 @@ exports.getConfig = function(params, callback) {
             if (err) {
               console.log("Error " + err);
             } else {
-              console.log(JSON.stringify(data));
+              console.log("deleteall: " + JSON.stringify(data));
               ret.doDeleteAll = data;
 
               $fh.db({
@@ -52,7 +52,7 @@ exports.getConfig = function(params, callback) {
                   console.log("Error " + err);
                 } else {
           
-                  console.log(JSON.stringify(data));
+                  console.log("List after delete: " + JSON.stringify(data));
                   ret.doListAfterDelete = data;
                   return callback(undefined, {config: ret});
 
