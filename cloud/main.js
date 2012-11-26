@@ -31,6 +31,7 @@ exports.getConfig = function(params, callback) {
         if (err) {
           console.log("Error " + err);
         } else {
+          
           console.log(JSON.stringify(data));
           ret.doList = data;
           $fh.db({
@@ -43,10 +44,24 @@ exports.getConfig = function(params, callback) {
               console.log(JSON.stringify(data));
               ret.doDeleteAll = data;
 
-              return callback(undefined, {config: ret});
+              $fh.db({
+                "act":'list', 
+                "type": "fhdb_tester"
+              }, function(err, data) {
+                if (err) {
+                  console.log("Error " + err);
+                } else {
+          
+                  console.log(JSON.stringify(data));
+                  ret.doListAfterDelete = data;
+                  return callback(undefined, {config: ret});
 
+                } 
+              });
+          
             }
           });
+          
         }
       });
     }
